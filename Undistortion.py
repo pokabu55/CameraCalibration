@@ -11,8 +11,8 @@ dist = np.loadtxt('./K.csv', delimiter=',')
 print(dist)
 
 img = cv2.imread('./img/IMG_8033.JPG')
-h,  w = img.shape[:2]
-newcameramtx, roi=cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
+h, w = img.shape[:2]
+newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
 
 # undistort
 dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
