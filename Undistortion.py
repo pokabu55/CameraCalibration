@@ -10,20 +10,23 @@ print(mtx)
 dist = np.loadtxt('./K.csv', delimiter=',')
 print(dist)
 
-#img = cv2.imread('./img/IMG_8033.JPG')
+# 変換したい画像ファイルのロード
 img = cv2.imread('./img/IMG_8231.JPG')
 h, w = img.shape[:2]
+
+# 新カメラマトリックスの
 print(img.shape)
 newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
 
 # undistort
 dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
 
+# 結果プレビュー
 resized_dst = cv2.resize(dst,dsize=(w//4, h//4))
 cv2.imshow('img',resized_dst)
 cv2.waitKey(500)
 
-# crop the image
+# 画像の保存
 x,y,w,h = roi
 dst = dst[y:y+h, x:x+w]
 cv2.imwrite('calib_result.png',dst)

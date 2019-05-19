@@ -4,7 +4,6 @@ import glob
 
 # termination criteria
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
-#criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_COUNT,    30, 0.1  )
             
 # 水平方向の交点数
 horCpNum = 10
@@ -54,6 +53,7 @@ for fname in images:
 
 cv2.destroyAllWindows()
 
+# キャリブレーションパラメータ算出
 ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1],None,None)
 
 print('reprojection error:\n', ret) # 交点検出に成功した場合は True、そうでない場合は False
