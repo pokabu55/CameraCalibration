@@ -4,7 +4,8 @@ import glob
 
 # termination criteria
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
-
+#criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_COUNT,    30, 0.1  )
+            
 # 水平方向の交点数
 horCpNum = 10
 # 垂直方向の交点数
@@ -23,10 +24,11 @@ imgIndex = 0
 
 for fname in images:
     img = cv2.imread(fname)
+    print(fname)
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
     # Find the chess board corners
-    found, corners = cv2.findChessboardCorners(gray, (horCpNum,verCpNum),None)
+    found, corners = cv2.findChessboardCorners(gray, (verCpNum, horCpNum), None)
 
     # If found, add object points, image points (after refining them)
     if found == True:
@@ -37,7 +39,7 @@ for fname in images:
         imgpoints.append(corners2)
 
         # Draw and display the corners
-        img = cv2.drawChessboardCorners(img, (horCpNum,verCpNum), corners2, found)
+        img = cv2.drawChessboardCorners(img, (verCpNum, horCpNum), corners2, found)
 
         print('corners shape:', corners.shape)
         width = img.shape[1]
